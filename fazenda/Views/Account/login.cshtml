@@ -2,6 +2,24 @@
 @model fazenda.Views.Account.loginModel
 @{
 }
+<head>
+  <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f7f7f7;
+        }
+        .login-container h2 {
+            text-align: center;s
+            color: #4CAF50;
+        }
+        /* Outras classes de estilização */
+    </style>
+    </head>
+    <body>
 <div class="login-container">
     <h2>Login</h2>
     <form asp-action="Login" method="post">
@@ -19,3 +37,4 @@
         <a href="#">Esqueci minha senha</a>
     </form>
 </div>
+</body>
