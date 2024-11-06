@@ -1,0 +1,21 @@
+﻿@page
+@model fazenda.Views.Account.loginModel
+@{
+}
+<div class="login-container">
+    <h2>Login</h2>
+    <form asp-action="Login" method="post">
+        <div>
+            <label for="email">E-mail:</label>
+            <input asp-for="Email" type="email" placeholder="exemplo@gmail.com" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label for="password">Senha:</label>
+            <input asp-for="Password" type="password" placeholder="Digite sua senha" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <button type="submit">Entrar</button>
+        <a href="#">Esqueci minha senha</a>
+    </form>
+</div>
