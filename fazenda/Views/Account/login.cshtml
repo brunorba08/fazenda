@@ -1,40 +1,219 @@
-﻿@page
-@model fazenda.Views.Account.loginModel
-@{
-}
+﻿@model fazenda.Models.User
+
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <style>
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: #fff;
             border-radius: 10px;
-            background-color: #f7f7f7;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 400px;
+            text-align: center;
         }
-        .login-container h2 {
-            text-align: center;s
+
+        h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 28px; /* Aumentando ainda mais o tamanho do título */
+        }
+
+        p {
+            font-size: 18px; /* Aumentando ainda mais o tamanho do subtítulo */
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+            input[type="email"]:focus,
+            input[type="password"]:focus {
+                border-color: #4CAF50;
+                outline: none;
+            }
+
+        .password-container {
+            position: relative;
+        }
+
+            .password-container input {
+                width: 100%;
+                padding: 12px;
+                padding-right: 35px; /* Espaço para o ícone */
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+
+            .password-container button {
+                position: absolute;
+                right: 5px;
+                top: 62%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                color: #4CAF50;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a049;
+                transform: scale(1.1);
+                box-shadow: 0 4px 10px rgba(76, 175, 80, 0.6); /* Sombra verde suave */
+            }
+
+        .register-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .register-button:hover {
+                background-color: #45a049;
+                transform: scale(1.1);
+                box-shadow: 0 4px 10px rgba(76, 175, 80, 0.6); /* Sombra verde suave */
+            }
+
+        a {
             color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
         }
-        /* Outras classes de estilização */
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .links {
+            margin-top: 10px; /* Diminuindo o espaço acima do link */
+            text-align: center; /* Centralizando o link */
+        }
+
+            .links a {
+                display: inline-block;
+                margin: 5px 0;
+            }
+
+        /* Estilos para o separador "ou" */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+            .divider hr {
+                flex-grow: 1;
+                border: 0;
+                border-top: 1px solid #ccc;
+            }
+
+            .divider span {
+                margin: 0 10px;
+                font-weight: bold;
+                color: #666;
+            }
     </style>
-    </head>
-    <body>
-<div class="login-container">
-    <h2>Login</h2>
-    <form asp-action="Login" method="post">
-        <div>
-            <label for="email">E-mail:</label>
-            <input asp-for="Email" type="email" placeholder="exemplo@gmail.com" />
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input asp-for="Password" type="password" placeholder="Digite sua senha" />
-            <span asp-validation-for="Password"></span>
-        </div>
-        <button type="submit">Entrar</button>
-        <a href="#">Esqueci minha senha</a>
-    </form>
-</div>
+</head>
+<body>
+    <div class="login-box">
+        <h3>Login</h3>
+        <p>Entrar com e-mail e senha</p>
+
+        <form method="post">
+            <div>
+                <label for="Email">E-mail:</label>
+                <input asp-for="Email" type="email" placeholder="Digite seu e-mail" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="password-container">
+                <label for="Password">Senha:</label>
+                <input asp-for="Password" type="password" placeholder="Digite sua senha" id="passwordInput" />
+                <button type="button" id="togglePassword">👁️</button>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="links">
+                <a href="#">Esqueci minha senha</a>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+            <!-- Linha de divisão com o "OU" no meio -->
+            <div class="divider">
+                <hr>
+                <span>OU</span>
+                <hr>
+            </div>
+
+            <!-- Botão para fazer cadastro -->
+            <button type="button" class="register-button" onclick="window.location.href='#'">Faça seu cadastro</button>
+        </form>
+    </div>
+
+    @section Scripts {
+        <script>
+            // Função para alternar a visibilidade da senha
+            document.getElementById('togglePassword').addEventListener('click', function () {
+                const passwordInput = document.getElementById('passwordInput');
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+            });
+        </script>
+    }
 </body>
+</html>

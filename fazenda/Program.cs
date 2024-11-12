@@ -20,8 +20,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Configura a rota padrão para ir direto para o controlador de login (Account) e ação Login
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}"); // Alterado para usar o controlador Account e a ação Login
 
 app.Run();
