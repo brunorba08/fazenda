@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <style>
-        /* Os estilos podem ser iguais ao da tela de login para manter a consistência */
         body {
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
@@ -19,24 +18,35 @@
             height: 100vh;
         }
 
-        .login-box {
+        .container {
+            display: flex;
+            justify-content: space-between;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 400px;
-            text-align: center;
+            width: 800px;
+            padding: 20px;
+        }
+
+        .form-box {
+            width: 60%;
+        }
+
+        .checkbox-box {
+            width: 40%;
+            padding-left: 20px;
+            border-left: 1px solid #ccc;
         }
 
         h3 {
             margin-bottom: 20px;
             color: #333;
-            font-size: 28px;
+            font-size: 24px;
         }
 
         p {
-            font-size: 18px;
-            margin-bottom: 30px;
+            font-size: 16px;
+            margin-bottom: 15px;
             color: #666;
         }
 
@@ -50,23 +60,16 @@
 
         input[type="email"],
         input[type="password"],
-        input[type="text"] {
+        input[type="text"],
+        input[type="tel"] {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             font-size: 14px;
-            transition: all 0.3s ease;
         }
-
-            input[type="email"]:focus,
-            input[type="password"]:focus,
-            input[type="text"]:focus {
-                border-color: #4CAF50;
-                outline: none;
-            }
 
         button[type="submit"] {
             width: 100%;
@@ -86,56 +89,99 @@
                 box-shadow: 0 4px 10px rgba(76, 175, 80, 0.6);
             }
 
-        .login-link {
-            margin-top: 10px;
+        .checkbox-item {
+            margin-bottom: 15px;
         }
 
-            .login-link a {
-                color: #4CAF50;
-                text-decoration: none;
+            .checkbox-item input {
+                margin-right: 10px;
             }
-
-                .login-link a:hover {
-                    text-decoration: underline;
-                }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h3>Cadastro</h3>
-        <p>Crie sua conta</p>
+    <div class="container">
+        <div class="form-box">
+            <h3>Cadastro</h3>
+            <form method="post">
+                <div>
+                    <label for="Name">Nome:</label>
+                    <input asp-for="Name" type="text" placeholder="Digite seu nome" />
+                </div>
 
-        <form method="post">
-            <div>
-                <label for="Name">Nome:</label>
-                <input asp-for="Name" type="text" placeholder="Digite seu nome" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <div>
+                    <label for="NomeFantasia">Nome Fantasia:</label>
+                    <input asp-for="NomeFantasia" type="text" placeholder="Digite o nome fantasia" />
+                </div>
+
+                <div>
+                    <label for="NomeSocial">Nome Social:</label>
+                    <input asp-for="NomeSocial" type="text" placeholder="Digite o nome social" />
+                </div>
+
+                <div>
+                    <label for="CPF">CPF:</label>
+                    <input asp-for="CPF" type="text" placeholder="Digite o CPF" />
+                </div>
+
+                <div>
+                    <label for="CNPJ">CNPJ:</label>
+                    <input asp-for="CNPJ" type="text" placeholder="Digite o CNPJ" />
+                </div>
+
+                <div>
+                    <label for="Email">E-mail:</label>
+                    <input asp-for="Email" type="email" placeholder="Digite seu e-mail" />
+                </div>
+
+                <div>
+                    <label for="Telefone">Telefone:</label>
+                    <input asp-for="Telefone" type="tel" placeholder="Digite seu telefone" />
+                </div>
+
+                <div>
+                    <label for="Password">Senha:</label>
+                    <input asp-for="Password" type="password" placeholder="Digite sua senha" />
+                </div>
+
+                <div>
+                    <label for="ConfirmPassword">Confirmar Senha:</label>
+                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirme sua senha" />
+                </div>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+
+        <div class="checkbox-box">
+            <div class="checkbox-item">
+                <input type="checkbox" id="email" />
+                <label for="email">Aceito receber comunicações por E-mail</label>
             </div>
-
-            <div>
-                <label for="Email">E-mail:</label>
-                <input asp-for="Email" type="email" placeholder="Digite seu e-mail" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sms" />
+                <label for="sms">Aceito receber comunicações por SMS</label>
             </div>
-
-            <div>
-                <label for="Password">Senha:</label>
-                <input asp-for="Password" type="password" placeholder="Digite sua senha" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="checkbox-item">
+                <input type="checkbox" id="whatsapp" />
+                <label for="whatsapp">Aceito receber comunicações por WhatsApp</label>
             </div>
-
-            <div>
-                <label for="ConfirmPassword">Confirmar Senha:</label>
-                <input asp-for="ConfirmPassword" type="password" placeholder="Confirme sua senha" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="checkbox-item">
+                <input type="checkbox" id="termos" />
+                <label for="termos">Aceito os Termos e Condições de Uso</label>
             </div>
-
-            <button type="submit">Cadastrar</button>
-
-            <div class="login-link">
-                <p>Já tem uma conta? <a href="@Url.Action("Login", "Account")">Faça login</a></p>
+            <div class="checkbox-item">
+                <input type="checkbox" id="privacidade" />
+                <label for="privacidade">Aceito a Política de Privacidade</label>
             </div>
-        </form>
+            <div class="checkbox-item">
+                <input type="checkbox" id="bemQuerer" />
+                <label for="bemQuerer">Participe do Cliente Bem Querer e garanta benefícios exclusivos</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="regulamento" />
+                <label for="regulamento">Aceito o regulamento do Cliente Bem Querer</label>
+            </div>
+        </div>
     </div>
 </body>
 </html>
