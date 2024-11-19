@@ -1,4 +1,58 @@
-﻿@page
-@model fazenda.Views.Shared._TopMenuModel
-@{
-}
+﻿@* Dentro do _TopMenu.cshtml *@
+
+@* Adicionando o estilo diretamente dentro do arquivo *@
+<style>
+    /* Remover o padding-top do body para não sobrepor a navbar */
+    body {
+        margin-top: 0; /* Certifique-se de que o body não tem espaço extra no topo */
+    }
+
+    /* Estilo da navbar fixa no topo */
+    .navbar {
+        position: fixed; /* Garante que a navbar fique fixa no topo */
+        top: 0; /* Posiciona no topo */
+        left: 0; /* Alinha a navbar à esquerda */
+        width: 100%; /* Garante que a navbar ocupe a largura inteira */
+        z-index: 1050; /* Garante que a navbar fique acima de outros conteúdos */
+    }
+
+    /* Adiciona um espaçamento adequado para o conteúdo abaixo da navbar fixa */
+    .main-content {
+        padding-top: 80px; /* Ajuste conforme necessário, para evitar sobreposição com a navbar */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+            <img src="~/images/logo.png" alt="Logo da Fazenda" style="height: 40px;" />
+        </a>
+
+        <!-- Barra de Pesquisa -->
+        <form class="d-flex mx-auto" style="width: 50%;">
+            <input class="form-control me-2" type="search" placeholder="Pesquisar por produtos ou marcas..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+        </form>
+
+        <!-- Menu de Navegação -->
+        <div class="collapse navbar-collapse justify-content-between">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Login"><i class="fas fa-user"></i> Login / Cadastro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Botão de Alternância para dispositivos móveis -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
