@@ -1,8 +1,185 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<br>
+<br>
+<!-- Banner Central -->
+<div class="banner text-center bg-danger text-white py-5">
+    <h1 class="display-4">Promoções Imperdíveis!</h1>
+    <p class="lead">Aproveite descontos exclusivos por tempo limitado.</p>
 </div>
+
+<!-- Cards de Produtos -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto1.jpg" alt="Imagem do Produto 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Coentro</h5>
+                    <p class="card-text">R$ 5,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Coentro')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto2.jpg" alt="Imagem do Produto 2">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Alface Crespa</h5>
+                    <p class="card-text">R$ 6,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Alface Crespa')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto3.jpg" alt="Imagem do Produto 3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Alface Americana</h5>
+                    <p class="card-text">R$ 5,50</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Alface Americana')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto4.jpg" alt="Imagem do Produto 4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Repolho</h5>
+                    <p class="card-text">R$ 4,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Repolho')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <!-- Card 5 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto5.jpg" alt="Imagem do Produto 5">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Agrião</h5>
+                    <p class="card-text">R$ 7,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Agrião')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto6.jpg" alt="Imagem do Produto 6">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rúcula</h5>
+                    <p class="card-text">R$ 8,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Rúcula')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto7.jpg" alt="Imagem do Produto 7">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Brócolis</h5>
+                    <p class="card-text">R$ 9,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Brócolis')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="IMG/produto8.jpg" alt="Imagem do Produto 8">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Couve Flor</h5>
+                    <p class="card-text">R$ 10,00</p>
+                    <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Couve Flor')">
+                        <i class="bi bi-heart"></i> Favoritar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sobre Nós -->
+<div class="about-us bg-light py-5">
+    <div class="container text-center">
+        <h2 class="text-success">Sobre Nós</h2>
+        <p class="lead mt-4">
+            A <strong>Fazenda Green City</strong> é a parceira ideal para comércios que buscam verduras frescas e de alta qualidade, com fornecimento em larga escala. Nosso compromisso é garantir que você receba produtos selecionados, diretamente da fazenda para o seu negócio.
+        </p>
+        <p>
+            Somos especializados na produção e distribuição de verduras em grandes volumes, embaladas em caixas para atender supermercados, feirantes, restaurantes e outros estabelecimentos comerciais. Trabalhamos com agilidade e responsabilidade para suprir suas demandas com:
+        </p>
+        <ul class="list-unstyled">
+            <li class="text-success">
+                <i class="bi bi-check-circle"></i> Fornecimento constante e em grandes quantidades.
+            </li>
+            <li class="text-success">
+                <i class="bi bi-check-circle"></i> Produtos frescos colhidos no dia do envio.
+            </li>
+            <li class="text-success">
+                <i class="bi bi-check-circle"></i> Logística eficiente para entrega rápida.
+            </li>
+            <li class="text-success">
+                <i class="bi bi-check-circle"></i> Embalagens práticas e seguras em caixas.
+            </li>
+        </ul>
+        <p>
+            Na <strong>Fazenda Green City</strong>, entendemos as necessidades do seu comércio e estamos prontos para fornecer soluções confiáveis e personalizadas. Faça parte da nossa rede de parceiros e ofereça o melhor aos seus clientes.
+        </p>
+    </div>
+</div>
+
+
+<script>
+    function addToFavorites(productName) {
+        // Salva o produto no localStorage (ou você pode usar outra lógica de backend).
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if (!favorites.includes(productName)) {
+            favorites.push(productName);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert(`${productName} foi adicionado aos favoritos!`);
+        } else {
+            alert(`${productName} já está na lista de favoritos.`);
+        }
+
+        // Redireciona para a página de favoritos
+        window.location.href = '/Favorites/Index';
+    }
+</script>

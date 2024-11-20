@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - fazenda</title>
+    <title>@ViewData["Title"] - Fazenda</title>
 
     <!-- Estilos de CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -13,6 +13,45 @@
 
     <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Garantir que o rodapé fique no final da página */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* Estilos do rodapé */
+        .fixed-footer {
+            width: 100%;
+            background-color: #f8f9fa; /* Cor do fundo do rodapé */
+            border-top: 4px solid #006400; /* Borda verde escura */
+            color: #212529;
+            z-index: 10;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+            .fixed-footer a {
+                color: #007bff; /* Cor dos links */
+                text-decoration: none;
+            }
+
+                .fixed-footer a:hover {
+                    text-decoration: underline;
+                }
+
+            .fixed-footer .container {
+                max-width: 960px;
+                margin: 0 auto;
+            }
+    </style>
 </head>
 <body>
     <header>
@@ -29,9 +68,14 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Fazenda - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Rodapé -->
+    <footer class="footer fixed-footer">
+        <div class="container text-center py-3">
+            <p class="mb-1">&copy; 2024 - Fazenda Green City</p>
+            <p class="mb-1">Endereço: Rua das Flores, 123, Bairro Jardim das Plantas, Cidade Verde</p>
+            <p class="mb-1">Telefone: (11) 98765-4321 | CNPJ: 12.345.678/0001-90</p>
+            <p class="mb-1">E-mail: <a href="mailto:contato@greencity.com.br">contato@greencity.com.br</a></p>
+            <p><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
         </div>
     </footer>
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Cinza claro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .favorites-box {
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            background-color: #ffffff; /* Branco */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333333; /* Cinza escuro */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666666; /* Cinza m�dio */
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff; /* Azul */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Azul escuro */
+        }
+    </style>
+</head>
+<body>
+    <br><br>
+    <div class="favorites-box">
+        <h2>Aqui estão seus produtos favoritos!</h2>
+        <p>Adicione seus produtos favoritos clicando no coração nos itens.</p>
+        <button onclick="window.location.href='@Url.Action("Index", "Home")'"> Voltar � Página Inicial </button>
+    </div>
+</body>
+</html>

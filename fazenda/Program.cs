@@ -1,28 +1,28 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adiciona os serviços ao contêiner.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configura o pipeline de requisições HTTP.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseExceptionHandler("/Home/Error"); // Erro para ambientes de produção.
+    app.UseHsts(); // Configura o HSTS.
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseHttpsRedirection(); // Redireciona para HTTPS.
+app.UseStaticFiles(); // Permite o uso de arquivos estáticos (CSS, JS, imagens).
 
-app.UseRouting();
+app.UseRouting(); // Habilita o roteamento.
 
-app.UseAuthorization();
+app.UseAuthorization(); // Autoriza as requisições.
 
-// Configura a rota padrão para ir direto para o controlador de login (Account) e ação Login
+// Configura a rota padrão para direcionar para o controlador Home e a ação Index
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}"); // Alterado para usar o controlador Account e a ação Login
+    pattern: "{controller=Home}/{action=Index}/{id?}"); // Rota padrão (Home/Index)
 
+// Inicia a aplicação.
 app.Run();
