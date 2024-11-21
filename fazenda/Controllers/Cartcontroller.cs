@@ -1,68 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using fazenda.Models;
 using System.Collections.Generic;
-using System.Linq;
 
-public class CartController : Controller
+namespace fazenda.Controllers
 {
-    // Exibe o carrinho
-    public IActionResult Index()
+    public class CartController : Controller
     {
-        var cart = HttpContext.Session.GetString("cart");
-        var cartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonSerializer.Deserialize<List<CartItem>>(cart);
-        return View(cartItems);
-    }
-
-    // Adiciona um item ao carrinho
-    [HttpPost]
-    public IActionResult AddToCart(string productName, decimal price)
-    {
-        var cart = HttpContext.Session.GetString("cart");
-        var cartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonSerializer.Deserialize<List<CartItem>>(cart);
-
-        var existingItem = cartItems.FirstOrDefault(x => x.Name == productName);
-        if (existingItem != null)
+        public IActionResult Index()
         {
-            existingItem.Quantity++;
-        }
-        else
-        {
-            cartItems.Add(new CartItem { Name = productName, Price = price, Quantity = 1 });
+            // Exemplo de itens no carrinho
+            var cartItems = new List<CartItem>
+            {
+                new CartItem { Name = "Produto 1", Price = 10.99m, Quantity = 2 },
+                new CartItem { Name = "Produto 2", Price = 25.50m, Quantity = 1 }
+            };
+
+            return View(cartItems);
         }
 
-        HttpContext.Session.SetString("cart", JsonSerializer.Serialize(cartItems));
-        return RedirectToAction("Index");
-    }
-
-    // Remove um item do carrinho
-    [HttpPost]
-    public IActionResult RemoveFromCart(string productName)
-    {
-        var cart = HttpContext.Session.GetString("cart");
-        var cartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonSerializer.Deserialize<List<CartItem>>(cart);
-
-        var itemToRemove = cartItems.FirstOrDefault(x => x.Name == productName);
-        if (itemToRemove != null)
+        [HttpPost]
+        public IActionResult RemoveFromCart(string productName)
         {
-            cartItems.Remove(itemToRemove);
+            TempData["Message"] = $"{productName} removido do carrinho!";
+            return RedirectToAction("Index");
         }
 
-        HttpContext.Session.SetString("cart", JsonSerializer.Serialize(cartItems));
-        return RedirectToAction("Index");
+        [HttpPost]
+        public IActionResult ClearCart()
+        {
+            TempData["Message"] = "Carrinho limpo!";
+            return RedirectToAction("Index");
+        }
     }
-
-    // Limpa o carrinho
-    public IActionResult ClearCart()
-    {
-        HttpContext.Session.Remove("cart");
-        return RedirectToAction("Index");
-    }
-}
-
-// Modelo CartItem
-public class CartItem
-{
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-    public int Quantity { get; set; }
 }

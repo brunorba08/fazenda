@@ -1,28 +1,31 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona os serviços ao contêiner.
+// Adiciona serviços ao container.
 builder.Services.AddControllersWithViews();
+
+// Adiciona suporte a sessões
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo limite de sessão
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-// Configura o pipeline de requisições HTTP.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error"); // Erro para ambientes de produção.
-    app.UseHsts(); // Configura o HSTS.
-}
+// Configuração do middleware
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-app.UseHttpsRedirection(); // Redireciona para HTTPS.
-app.UseStaticFiles(); // Permite o uso de arquivos estáticos (CSS, JS, imagens).
+app.UseRouting();
 
-app.UseRouting(); // Habilita o roteamento.
+app.UseSession(); // Habilita sessões
 
-app.UseAuthorization(); // Autoriza as requisições.
+app.UseAuthorization();
 
-// Configura a rota padrão para direcionar para o controlador Home e a ação Index
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"); // Rota padrão (Home/Index)
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Inicia a aplicação.
 app.Run();
