@@ -31,11 +31,10 @@
         .fixed-footer {
             width: 100%;
             background-color: #f8f9fa; /* Cor do fundo do rodapé */
-            border-top: 4px solid #006400; /* Borda verde escura */
+            border-top: 3px solid #006400; /* Borda verde escura */
             color: #212529;
             z-index: 10;
             text-align: center;
-            padding: 20px 0;
         }
 
             .fixed-footer a {
@@ -47,10 +46,14 @@
                     text-decoration: underline;
                 }
 
-            .fixed-footer .container {
-                max-width: 960px;
-                margin: 0 auto;
-            }
+        .contact-text {
+            font-size: 14px; /* Reduzir o tamanho da fonte */
+            margin-bottom: 8px; /* Adicionar um pequeno espaçamento */
+        }
+
+        .fixed-footer p {
+            margin: 2px 0; /* Reduzir o espaçamento entre os parágrafos */
+        }
     </style>
 </head>
 <body>
@@ -72,10 +75,9 @@
     <footer class="footer fixed-footer">
         <div class="container text-center py-3">
             <p class="mb-1">&copy; 2024 - Fazenda Green City</p>
+            <p class="contact-text">Alguma dúvida? Entre em contato conosco em algum desses meios:</p>
+            <p class="mb-1">Telefone: (11) 98765-4321 | CNPJ: 12.345.678/0001-90| E-mail: <a href="mailto:contato@greencity.com.br">contato@greencity.com.br</a></p>
             <p class="mb-1">Endereço: Rua das Flores, 123, Bairro Jardim das Plantas, Cidade Verde</p>
-            <p class="mb-1">Telefone: (11) 98765-4321 | CNPJ: 12.345.678/0001-90</p>
-            <p class="mb-1">E-mail: <a href="mailto:contato@greencity.com.br">contato@greencity.com.br</a></p>
-            <p><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
         </div>
     </footer>
 
