@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Registro</title>
+    <title>Cadastro</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,18 +23,13 @@
             justify-content: space-between;
             background-color: #fff;
             border-radius: 10px;
-            width: 90%; /* Diminuir o tamanho da largura */
-            max-width: 600px; /* Limitar ainda mais a largura */
-            padding: 15px; /* Reduzir o padding interno */
+            width: 90%;
+            max-width: 600px;
+            padding: 15px;
         }
 
         .form-box {
-            width: 55%; /* Ajuste proporcional � nova largura */
-        }
-
-        .checkbox-box {
-            width: 40%;
-            padding-left: 15px;
+            width: 100%;
         }
 
         h3 {
@@ -44,16 +38,9 @@
             font-size: 20px;
         }
 
-        p {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
         label {
             font-weight: bold;
             display: block;
-            text-align: left;
             margin-bottom: 5px;
             color: #333;
         }
@@ -87,103 +74,70 @@
                 background-color: #45a049;
                 transform: scale(1.05);
             }
-
-        .checkbox-item {
-            margin-bottom: 10px;
-        }
-
-            .checkbox-item input {
-                margin-right: 10px;
-            }
-
     </style>
 </head>
 <body>
-    <br><br>
     <div class="container">
         <div class="form-box">
             <h3>Cadastro</h3>
             <form method="post">
                 <div>
-                    <label for="Name">Nome:</label>
-                    <input asp-for="Name" type="text" placeholder="Digite seu nome" />
+                    <label asp-for="Name">Nome:</label>
+                    <input asp-for="Name" type="text" placeholder="Digite o nome" />
                 </div>
-
                 <div>
-                    <label for="NomeFantasia">Nome Fantasia:</label>
-                    <input asp-for="NomeFantasia" type="text" placeholder="Digite o nome fantasia" />
-                </div>
-
-                <div>
-                    <label for="NomeSocial">Nome Social:</label>
-                    <input asp-for="NomeSocial" type="text" placeholder="Digite o nome social" />
-                </div>
-
-                <div>
-                    <label for="CPF">CPF:</label>
+                    <label asp-for="CPF">CPF:</label>
                     <input asp-for="CPF" type="text" placeholder="Digite o CPF" />
                 </div>
-
                 <div>
-                    <label for="CNPJ">CNPJ:</label>
-                    <input asp-for="CNPJ" type="text" placeholder="Digite o CNPJ" />
+                    <label asp-for="Email">E-mail:</label>
+                    <input asp-for="Email" type="email" placeholder="Digite seu e-mail" />
                 </div>
-
                 <div>
-                    <label for="Email">E-mail:</label>
-                    <input asp-for="Email" type="email" placeholder="meu oau" />
-                </div>
-
-                <div>
-                    <label for="Telefone">Telefone:</label>
+                    <label asp-for="Telefone">Telefone:</label>
                     <input asp-for="Telefone" type="tel" placeholder="Digite seu telefone" />
                 </div>
-
                 <div>
-                    <label for="Password">Senha:</label>
+                    <label asp-for="Password">Senha:</label>
                     <input asp-for="Password" type="password" placeholder="Digite sua senha" />
                 </div>
-
                 <div>
-                    <label for="ConfirmPassword">Confirmar Senha:</label>
+                    <label asp-for="ConfirmPassword">Confirmar Senha:</label>
                     <input asp-for="ConfirmPassword" type="password" placeholder="Confirme sua senha" />
                 </div>
-
                 <button type="submit">Cadastrar</button>
             </form>
         </div>
+    </div>
 
-        <div class="checkbox-box">
-            <h3>AUTORIZO RECEBER OFERTAS E NOVIDADES POR</h3>
-            <div class="checkbox-item">
-                <input type="checkbox" id="email" />
-                <label for="email">Aceito receber comunica��es por E-mail</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="sms" />
-                <label for="sms">Aceito receber comunica��es por SMS</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="whatsapp" />
-                <label for="whatsapp">Aceito receber comunica��es por WhatsApp</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="termos" />
-                <label for="termos">Aceito os Termos e Condi��es de Uso</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="privacidade" />
-                <label for="privacidade">Aceito a Pol�tica de Privacidade</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="bemQuerer" />
-                <label for="bemQuerer">Participe do Cliente Bem Querer e garanta benef�cios exclusivos</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="regulamento" />
-                <label for="regulamento">Aceito o regulamento do Cliente Bem Querer</label>
-            </div>
+    <div class="checkbox-box">
+        <h3>AUTORIZO RECEBER OFERTAS E NOVIDADES POR</h3>
+        <div class="checkbox-item">
+            <input type="checkbox" id="email" />
+            <label for="email">E-mail</label>
         </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="sms" />
+            <label for="sms">SMS</label>
+        </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="whatsapp" />
+            <label for="whatsapp">WhatsApp</label>
+        </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="termos" />
+            <label for="termos">
+                Aceito os Termos e Condições de Uso do Site e App e a Politica de Privacidade.
+                Participe do Cliente Bem Querer e garanta beneficios exclusivos em loja física e online
+            </label>
+        </div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="privacidade" />
+            <label for="privacidade">
+                Aceito o Regulamento do Cliente Bem Querer e passo a fazer parte do programa de vantagens do fgc. Saiba mais
+            </label>
+        </div>
+    </div>
     </div>
 </body>
 </html>
