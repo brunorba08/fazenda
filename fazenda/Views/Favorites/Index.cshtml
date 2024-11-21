@@ -17,9 +17,9 @@
         }
 
         .favorites-box {
-            width: 90%;
-            max-width: 800px;
-            height: 80%;
+            width: 95%; /* Aumentar largura */
+            max-width: 1000px; /* Ajustar tamanho máximo */
+            height: 85%; /* Aumentar altura */
             background-color: #ffffff; /* Branco */
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
@@ -38,7 +38,7 @@
         }
 
         p {
-            color: #666666; /* Cinza m�dio */
+            color: #666666; /* Cinza médio */
             font-size: 16px;
         }
 
@@ -46,7 +46,7 @@
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #007bff; /* Azul */
+            background-color: green; /* Verde */
             color: white;
             border: none;
             border-radius: 5px;
@@ -54,9 +54,9 @@
             transition: background-color 0.3s;
         }
 
-        button:hover {
-            background-color: #0056b3; /* Azul escuro */
-        }
+            button:hover {
+                background-color: #005500; /* Verde escuro */
+            }
     </style>
 </head>
 <body>
@@ -64,7 +64,7 @@
     <div class="favorites-box">
         <h2>Aqui estão seus produtos favoritos!</h2>
         <p>Adicione seus produtos favoritos clicando no coração nos itens.</p>
-        <button onclick="window.location.href='@Url.Action("Index", "Home")'"> Voltar � Página Inicial </button>
+        <button onclick="window.location.href='@Url.Action("Index", "Home")'"> Voltar à Página Inicial </button>
     </div>
 </body>
 </html>
