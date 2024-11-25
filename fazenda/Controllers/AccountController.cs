@@ -1,10 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using fazenda.Models;  // Importando o modelo User
+using fazenda.Models;  // Para o modelo de dados (User)
+using fazenda.Data;    // Agora, você pode importar o contexto de dados
 
 namespace fazenda.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        // Construtor para injetar o contexto de dados
+        public AccountController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         // Ação GET para exibir a página de login
         [HttpGet]
         public IActionResult Login()
@@ -16,11 +25,12 @@ namespace fazenda.Controllers
         [HttpPost]
         public IActionResult Login(User model)
         {
-            if (ModelState.IsValid)  // Verifica se o modelo é válido (validação das anotações)
+            if (ModelState.IsValid)
             {
-                if (model.Email == "admin@admin.com" && model.Password == "admin123")
+                var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                if (user != null && user.Password == model.Password)
                 {
-                    return RedirectToAction("Index", "Home");  // Redireciona para a página inicial
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -34,7 +44,7 @@ namespace fazenda.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();  // Exibe a página de cadastro
+            return View();
         }
 
         // Ação POST para processar o cadastro
@@ -43,14 +53,18 @@ namespace fazenda.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Aqui você pode adicionar a lógica para salvar o usuário no banco de dados
-                // Exemplo: _context.Users.Add(model); _context.SaveChanges();
+                if (_context.Users.Any(u => u.Email == model.Email))
+                {
+                    ModelState.AddModelError(string.Empty, "Já existe um usuário com esse e-mail.");
+                    return View(model);
+                }
 
-                // Após o cadastro, redireciona o usuário para a página de login
+                _context.Users.Add(model);
+                _context.SaveChanges();
+
                 return RedirectToAction("Login");
             }
 
-            // Se o modelo for inválido, retorna a view com o modelo para mostrar erros de validação
             return View(model);
         }
     }

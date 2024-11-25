@@ -84,7 +84,7 @@
         <!-- Formulário de Pesquisa Centralizado -->
         <form class="form-inline mx-auto">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" >Pesquisar</button>
+            <button class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
         </form>
 
         <!-- Itens de Navegação Alinhados à Direita -->
@@ -105,11 +105,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Cart", "Cart")">
+                <a class="nav-link" href="@Url.Action("Carthome", "Cart")">
                     <i class="fas fa-shopping-cart"></i> Carrinho
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Stockhome", "Stock")">
+                    <i class="fas fa-warehouse"></i> Estoque
+                </a>
+            </li>
         </ul>
+
 
     </div>
 </nav>

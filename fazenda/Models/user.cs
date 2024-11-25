@@ -2,6 +2,7 @@
 
 namespace fazenda.Models
 {
+    // O código do seu modelo vem aqui, depois das declarações using.
     public class User
     {
         // Nome é obrigatório

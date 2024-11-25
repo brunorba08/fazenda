@@ -6,28 +6,43 @@ namespace fazenda.Controllers
 {
     public class CartController : Controller
     {
-        public IActionResult Index()
+        // Método para exibir o carrinho
+        public IActionResult Carthome()
         {
-            // Exemplo de itens no carrinho
-            var cartItems = new List<CartItem>
+            // Verifica se já existem itens no carrinho na sessão
+            var cartItems = TempData["CartItems"] as List<CartItem>;
+            if (cartItems == null)
             {
-                new CartItem { Name = "Produto 1", Price = 10.99m, Quantity = 2 },
-                new CartItem { Name = "Produto 2", Price = 25.50m, Quantity = 1 }
-            };
+                cartItems = new List<CartItem>(); // Se não houver, cria uma lista vazia
+            }
 
             return View(cartItems);
         }
 
+        // Método para remover item do carrinho
         [HttpPost]
         public IActionResult RemoveFromCart(string productName)
         {
-            TempData["Message"] = $"{productName} removido do carrinho!";
-            return RedirectToAction("Index");
+            var cartItems = TempData["CartItems"] as List<CartItem>;
+            if (cartItems != null)
+            {
+                var itemToRemove = cartItems.Find(item => item.Name == productName);
+                if (itemToRemove != null)
+                {
+                    cartItems.Remove(itemToRemove);
+                    TempData["Message"] = $"{productName} removido do carrinho!";
+                }
+            }
+
+            TempData["CartItems"] = cartItems; // Atualiza a lista no TempData
+            return RedirectToAction("Carthome");
         }
 
+        // Método para limpar o carrinho
         [HttpPost]
         public IActionResult ClearCart()
         {
+            TempData["CartItems"] = new List<CartItem>(); // Limpa o carrinho
             TempData["Message"] = "Carrinho limpo!";
             return RedirectToAction("Index");
         }
