@@ -2,9 +2,11 @@
 
 namespace fazenda.Models
 {
-    // O código do seu modelo vem aqui, depois das declarações using.
     public class User
     {
+        // Identificador do usuário (geralmente é auto-incrementado)
+        public int Id { get; set; }
+
         // Nome é obrigatório
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres.")]

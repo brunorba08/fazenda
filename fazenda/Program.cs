@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Builder;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,9 +29,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 var app = builder.Build();
 
 // Configuração do pipeline de middleware
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error"); // Rota de erro genérica
+    app.UseDeveloperExceptionPage(); // Exibe páginas de erro no ambiente de desenvolvimento
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error"); // Rota de erro genérica para produção
     app.UseHsts(); // Segurança adicional para HTTPS
 }
 

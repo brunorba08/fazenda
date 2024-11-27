@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using System;
 
 namespace fazenda
@@ -45,6 +46,7 @@ namespace fazenda
         // Este método é chamado pelo runtime. Use este método para configurar o pipeline HTTP.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Verifica o ambiente (desenvolvimento ou produção)
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); // Página de exceção para desenvolvimento

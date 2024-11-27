@@ -1,4 +1,4 @@
-﻿@model fazenda.Models.User
+﻿@model fazenda.Models.LoginViewModel
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -172,7 +172,7 @@
     </style>
 </head>
 <body>
-<br><br>
+    <br><br>
     <div class="login-box">
         <h3>Login</h3>
         <p>Entrar com e-mail e senha</p>
@@ -205,20 +205,23 @@
             </div>
 
             <!-- Botão para fazer cadastro -->
-            <button type="button" class="register-button" onclick="window.location.href='@Url.Action("Register", "Account")'">Faça seu cadastro</button>
+            <button type="button" class="register-button" onclick="location.href='@Url.Action("Register", "Account")'">Faça seu cadastro</button>
 
         </form>
     </div>
 
     @section Scripts {
         <script>
-            // Função para alternar a visibilidade da senha
             document.getElementById('togglePassword').addEventListener('click', function () {
                 const passwordInput = document.getElementById('passwordInput');
                 const type = passwordInput.type === 'password' ? 'text' : 'password';
                 passwordInput.type = type;
+
+                // Alternar o ícone
+                this.textContent = type === 'password' ? '👁️' : '🔒';
             });
         </script>
+
     }
 </body>
 </html>
