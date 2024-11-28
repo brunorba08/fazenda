@@ -1,84 +1,65 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;  // Importar para o DbContext
-using System;
-using fazenda.Data;  // Importar a classe do DbContext
+using fazenda.Data;  // Namespace correto onde o ApplicationDbContext está localizado
 
 namespace fazenda
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // Este método é chamado pelo runtime. Use este método para adicionar serviços ao contêiner.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Usando memória para sessão
-            services.AddDistributedMemoryCache();
+            // Configurando o DbContext
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("FaazendaDb"))); // Utilizando a string de conexão do appsettings.json
 
-            // Configura a sessão
+            // Configurações de sessão e autenticação
+            services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
-                options.Cookie.HttpOnly = true; // Garante que o cookie não seja acessível via JavaScript
-                options.Cookie.IsEssential = true; // Garante que o cookie seja enviado em todos os requests
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
-            // Adiciona autenticação baseada em cookies
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication()
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Account/Login"; // Rota para a página de login
-                    options.AccessDeniedPath = "/Account/AccessDenied"; // Rota para página de acesso negado
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
                 });
 
-            // Adiciona o DbContext com a string de conexão
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception("Connection string 'DefaultConnection' não encontrada.");
-            }
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            // Adiciona os serviços de controllers e views
             services.AddControllersWithViews();
         }
 
-        // Este método é chamado pelo runtime. Use este método para configurar o pipeline HTTP.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Verifica o ambiente (desenvolvimento ou produção)
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); // Página de exceção para desenvolvimento
+                app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error"); // Página de erro para produção
-                app.UseHsts(); // Segurança para HTTPS
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            app.UseHttpsRedirection(); // Redireciona HTTP para HTTPS
-            app.UseStaticFiles(); // Garante que os arquivos estáticos da pasta wwwroot sejam servidos
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            app.UseRouting(); // Ativa o roteamento
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseSession(); // Middleware de sessão (antes de autenticação)
+            app.UseSession();
 
-            app.UseAuthentication(); // Middleware para autenticação
-            app.UseAuthorization(); // Middleware de autorização
-
-            // Configura as rotas padrão
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

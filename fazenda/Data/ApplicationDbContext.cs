@@ -1,5 +1,5 @@
-using fazenda.Models;
 using Microsoft.EntityFrameworkCore;
+using fazenda.Models;
 
 namespace fazenda.Data
 {
@@ -15,16 +15,15 @@ namespace fazenda.Data
         {
         }
 
+        // Configuração do modelo (caso precise de ajustes adicionais)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Definir uma chave primária para o User, assumindo que 'Id' é a chave primária
+            // O EF Core já irá considerar 'Id' como chave primária se seguir a convenção padrão.
+            // Portanto, não é necessário configurar manualmente, mas se for necessário, você pode configurar como abaixo.
             modelBuilder.Entity<User>()
-                .HasKey(u => u.Id); // Substitua 'Id' pela sua propriedade que representa a chave primária, caso necessário
-
-            // Caso o 'User' não tenha uma chave primária, você pode manter o HasNoKey(), mas geralmente para persistência é necessário ter uma chave
-            // modelBuilder.Entity<User>().HasNoKey();
+                .HasKey(u => u.Id); // Isso é redundante se 'Id' for a chave primária por convenção
         }
     }
 }

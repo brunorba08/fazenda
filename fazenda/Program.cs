@@ -1,71 +1,61 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System; // Para garantir que TimeSpan seja reconhecido
 using fazenda.Data;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do banco de dados (DbContext)
+// Configuração do DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    sqlOptions => sqlOptions.EnableRetryOnFailure()));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Usando memória para sessão
+builder.Services.AddDistributedMemoryCache();
 
-// Configuração de autenticação e sessão
-builder.Services.AddDistributedMemoryCache(); // Usando cache em memória para sessão
+// Configura a sessão
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
-    options.Cookie.HttpOnly = true; // Garante que o cookie não seja acessível via JavaScript
-    options.Cookie.IsEssential = true; // Cookie essencial para funcionamento da sessão
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
-// Configuração de autenticação com Cookies
+// Configura autenticação baseada em cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Rota para login
-        options.AccessDeniedPath = "/Account/AccessDenied"; // Rota de acesso negado
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
     });
 
-// Adiciona suporte a controladores e views
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configuração do pipeline de requisições (middleware)
+// Verificação do ambiente
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage(); // Exibe erros detalhados durante o desenvolvimento
+    app.UseDeveloperExceptionPage();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error"); // Rota de erro em produção
-    app.UseHsts(); // HSTS (HTTP Strict Transport Security) para garantir HTTPS
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
-app.UseHttpsRedirection(); // Redireciona automaticamente para HTTPS
-app.UseStaticFiles(); // Ativa o uso de arquivos estáticos da pasta wwwroot
-
-// Configuração do roteamento
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
-
-// Autenticação e autorização
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Habilita sessões
-app.UseSession();
-
-// Definição das rotas padrão (controlador e ação)
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"
-);
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Run(); // Inicia a aplicação
+app.Run();
