@@ -84,26 +84,32 @@
                 <div>
                     <label asp-for="Name">Nome:</label>
                     <input asp-for="Name" type="text" placeholder="Digite o nome" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="CPF">CPF:</label>
                     <input asp-for="CPF" type="text" placeholder="Digite o CPF" />
+                    <span asp-validation-for="CPF" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="Email">E-mail:</label>
                     <input asp-for="Email" type="email" placeholder="Digite seu e-mail" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="Telefone">Telefone:</label>
                     <input asp-for="Telefone" type="tel" placeholder="Digite seu telefone" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="Password">Senha:</label>
                     <input asp-for="Password" type="password" placeholder="Digite sua senha" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="ConfirmPassword">Confirmar Senha:</label>
                     <input asp-for="ConfirmPassword" type="password" placeholder="Confirme sua senha" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <button type="submit">Cadastrar</button>
             </form>
@@ -128,7 +134,7 @@
             <input type="checkbox" id="termos" />
             <label for="termos">
                 Aceito os Termos e Condições de Uso do Site e App e a Politica de Privacidade.
-                Participe do Cliente Bem Querer e garanta beneficios exclusivos em loja física e online
+                Participe do Cliente Bem Querer e garanta benefícios exclusivos em loja física e online
             </label>
         </div>
         <div class="checkbox-item">

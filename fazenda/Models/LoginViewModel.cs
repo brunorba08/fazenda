@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace fazenda.Models
 {
     public class LoginViewModel
+
     {
         [Required]
         [EmailAddress]

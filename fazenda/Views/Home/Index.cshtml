@@ -84,9 +84,10 @@
                     <h5 class="card-title">Alface Americana</h5>
                     <p class="card-text">R$49,99 /15 undidades</p>
                     <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                    <button class="btn btn-outline-danger mt-2" onclick="addToFavorites('Alface Americana')">
+                    <button class="btn btn-outline-danger mt-2" onclick="window.location.href='@Url.Action("AddToFavorites", "Favorites", new { productName = "Alface Americana" })'">
                         <i class="bi bi-heart"></i> Favoritar
                     </button>
+
                 </div>
             </div>
         </div>

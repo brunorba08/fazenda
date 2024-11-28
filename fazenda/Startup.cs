@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;  // Importar para o DbContext
 using System;
+using fazenda.Data;  // Importar a classe do DbContext
 
 namespace fazenda
 {
@@ -38,6 +40,15 @@ namespace fazenda
                     options.LoginPath = "/Account/Login"; // Rota para a página de login
                     options.AccessDeniedPath = "/Account/AccessDenied"; // Rota para página de acesso negado
                 });
+
+            // Adiciona o DbContext com a string de conexão
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new Exception("Connection string 'DefaultConnection' não encontrada.");
+            }
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             // Adiciona os serviços de controllers e views
             services.AddControllersWithViews();
