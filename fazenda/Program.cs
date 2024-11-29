@@ -13,30 +13,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Usando memória para sessão
+// Configuração de cache em memória
 builder.Services.AddDistributedMemoryCache();
 
-// Configura a sessão
+// Configuração de sessão
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
+    options.Cookie.HttpOnly = true; // Protege o cookie contra ataques XSS
+    options.Cookie.IsEssential = true; // Necessário para funcionalidade crítica
 });
 
-// Configura autenticação baseada em cookies
+// Configuração de autenticação baseada em cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login";
-        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.LoginPath = "/Account/Login"; // Caminho para a tela de login
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Caminho para acesso negado
     });
 
+// Adiciona suporte para controladores e visualizações
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Verificação do ambiente
+// Configuração do ambiente
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -44,18 +45,22 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.UseHsts(); // Configuração de segurança para HTTPS
 }
 
+// Middleware do pipeline de requisições
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseSession();
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseStaticFiles(); // Serve arquivos estáticos (como CSS, JS, imagens)
 
+app.UseRouting();
+app.UseSession(); // Habilita o uso de sessões
+app.UseAuthentication(); // Habilita autenticação
+app.UseAuthorization(); // Habilita autorização
+
+// Configuração de rotas
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Inicializa a aplicação
 app.Run();

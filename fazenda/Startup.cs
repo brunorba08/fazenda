@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using fazenda.Data;  // Namespace correto onde o ApplicationDbContext está localizado
 
 namespace fazenda
